@@ -1,0 +1,3 @@
+[submodule "tre"]
+	path = tre
+	url = https://github.com/laurikari/tre.git
