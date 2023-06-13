@@ -26,18 +26,16 @@ fn main() {
 
     // Generate the config script.
     // I hate autotools so much.
-    let script_path = tre_path.join("utils").join("autogen.sh");
-    let script_path = script_path.to_str().unwrap();
     Command::new("sh")
         .current_dir(&tre_path)
-        .args(["-c", script_path])
+        .args(["-c", "./utils/autogen.sh"])
         .status()
         .expect("Could not run autogen.sh! Is autotools installed?");
 
     // Now do the actual configure/build stuff
     let dst = Config::new(out_path.join("tre"))
-        .enable("static", None)
-        .disable("shared", None)
+        .enable_static()
+        .disable_shared()
         .disable("agrep", None)
         .build();
 
