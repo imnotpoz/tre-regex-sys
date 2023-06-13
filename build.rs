@@ -3,12 +3,17 @@ extern crate bindgen;
 
 use std::env;
 use std::path::PathBuf;
+use std::process::Command;
 
 use autotools::Config;
 
 fn main() {
+    Command::new("sh")
+        .args(["-c", "tre/utils/autogen.sh"])
+        .status()
+        .expect("Could not run autogen.sh! Do you have autotools installed?");
+
     let dst = Config::new("tre")
-        .reconf("-ivf")
         .enable("static", None)
         .disable("shared", None)
         .disable("agrep", None)
