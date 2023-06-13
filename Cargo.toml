@@ -12,3 +12,4 @@ authors = ["Elizabeth Myers"]
 [build-dependencies]
 autotools = "0.2"
 bindgen = "*"
+fs_extra = "1.3.0"
