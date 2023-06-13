@@ -8,7 +8,8 @@ repository = "https://github.com/Elizafox/tre-regex-sys"
 license = "BSD-2-Clause"
 rust-version = "1.60.0"
 authors = ["Elizabeth Myers"]
-keywords = ["external-ffi-bindings", "text-processing"]
+categories = ["external-ffi-bindings", "text-processing"]
+keywords = ["regex", "tre", "ffi", "bindings", "sys"]
 
 [build-dependencies]
 bindgen = "0.65.1"
