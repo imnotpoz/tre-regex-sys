@@ -12,6 +12,7 @@ fn main() {
         .insource(true)
         .enable("static", None)
         .disable("shared", None)
+        .disable("agrep", None)
         .build();
 
     println!("cargo:rustc-link-search=native={}", dst.join("lib").display());
@@ -20,6 +21,11 @@ fn main() {
 
     let bindings = bindgen::Builder::default()
         .header("tre/include/tre.h")
+        .newtype_enum("reg_errcode_t")
+        .allowlist_function("tre_.*")
+        .allowlist_type("(reg.*_t|tre_.*)")
+        .allowlist_var("REG_.*")
+        .blocklist_type("register_t")
         .generate()
         .expect("Unable to generate bindings");
 
