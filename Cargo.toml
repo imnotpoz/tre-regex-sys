@@ -11,5 +11,5 @@ authors = ["Elizabeth Myers"]
 
 [build-dependencies]
 autotools = "0.2"
-bindgen = "*"
+bindgen = "0.65.1"
 fs_extra = "1.3.0"
