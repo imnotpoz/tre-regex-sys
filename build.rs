@@ -9,7 +9,7 @@ use autotools::Config;
 
 fn main() {
     Command::new("sh")
-        .args(["-c", "tre/utils/autogen.sh"])
+        .args(["-c", "cd tre && ./utils/autogen.sh"])
         .status()
         .expect("Could not run autogen.sh! Do you have autotools installed?");
 
