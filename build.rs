@@ -9,7 +9,8 @@ fn main() {
     #[allow(unused_mut)]
     let mut clang_args: Vec<String> = Vec::new();
 
-    #[cfg(feature = "vendored")] {
+    #[cfg(feature = "vendored")]
+    {
         use autotools::Config;
         use fs_extra::dir::{copy, remove, CopyOptions};
         use std::process::Command;
@@ -36,10 +37,7 @@ fn main() {
 
         // This is messy, I know, but rustc complains otherwise.
         let mut cfg = Config::new(&tre_path);
-        let dst = cfg
-            .enable_static()
-            .disable_shared()
-            .disable("agrep", None);
+        let dst = cfg.enable_static().disable_shared().disable("agrep", None);
 
         let dst = if cfg!(feature = "wchar") {
             dst.enable("wchar", None)
@@ -64,15 +62,20 @@ fn main() {
         );
         println!("cargo:rustc-link-lib=static=tre");
         println!("cargo:rustc-link-lib=c");
-        
+
         let pathbuf = out_path.join("include").join("tre.h");
         include_path = pathbuf.to_str().unwrap().to_string();
-    } #[cfg(not(feature = "vendored"))] {
-        let library = pkg_config::Config::new()
-            .statik(true)
-            .find("tre")
-            .unwrap();
-        clang_args.extend(library.include_paths.iter().map(|path| format!("-I{}", path.to_string_lossy())).collect::<Vec<_>>());
+    }
+    #[cfg(not(feature = "vendored"))]
+    {
+        let library = pkg_config::Config::new().statik(true).find("tre").unwrap();
+        clang_args.extend(
+            library
+                .include_paths
+                .iter()
+                .map(|path| format!("-I{}", path.to_string_lossy()))
+                .collect::<Vec<_>>(),
+        );
         include_path = "sys-wrapper.h".to_string();
     }
 
@@ -88,8 +91,7 @@ fn main() {
         .blocklist_type("register_t");
 
     if !cfg!(feature = "wchar") {
-        bindings = bindings
-            .blocklist_function("tre_reg(a)?w(n)?(comp|exec)");
+        bindings = bindings.blocklist_function("tre_reg(a)?w(n)?(comp|exec)");
     }
 
     if !cfg!(feature = "approx") {
@@ -99,9 +101,7 @@ fn main() {
             .blocklist_item("REG_APPROX_MATCHER");
     }
 
-    let bindings = bindings
-        .generate()
-        .expect("Unable to generate bindings");
+    let bindings = bindings.generate().expect("Unable to generate bindings");
 
     bindings
         .write_to_file(out_path.join("bindings.rs"))
