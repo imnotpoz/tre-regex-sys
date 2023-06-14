@@ -45,7 +45,7 @@ mod tests {
             ..Default::default()
         };
 
-        if unsafe { tre_regaexec(&preg, b"Hullo!\0".as_ptr() as *const _, &mut amatch, params, 0) } != 0
+        if unsafe { tre_reganexec(&preg, b"Hullo!".as_ptr() as *const _, 6, &mut amatch, params, 0) } != 0
         {
             panic!("tre_regaexec");
         }
