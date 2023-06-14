@@ -80,6 +80,8 @@ fn main() {
         .clang_args(clang_args)
         .header(include_path)
         .newtype_enum("reg_errcode_t")
+        .derive_default(true)
+        .opaque_type("regex_t")
         .allowlist_function("tre_.*")
         .allowlist_type("(reg.*_t|tre_.*)")
         .allowlist_var("REG_.*")
