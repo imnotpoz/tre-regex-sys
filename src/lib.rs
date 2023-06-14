@@ -9,6 +9,7 @@ mod tests {
     use super::*;
     use std::mem;
 
+    #[cfg(feature = "approx")]
     #[test]
     fn reganexec() {
         let mut preg = mem::MaybeUninit::<regex_t>::uninit();
