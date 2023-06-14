@@ -82,9 +82,10 @@ fn main() {
     let mut bindings = bindgen::Builder::default()
         .clang_args(clang_args)
         .header(include_path)
-        .newtype_enum("reg_errcode_t")
         .derive_default(true)
-        .opaque_type("regex_t")
+        .default_macro_constant_type(bindgen::MacroTypeVariation::Signed) // most API's use this
+        .newtype_enum("reg_errcode_t")
+        .opaque_type("regex_t") // Should be opaque
         .allowlist_function("tre_.*")
         .allowlist_type("(reg.*_t|tre_.*)")
         .allowlist_var("REG_.*")
