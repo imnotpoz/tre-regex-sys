@@ -7,6 +7,7 @@ include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::ffi::c_int;
     use std::mem;
 
     #[cfg(feature = "approx")]
@@ -17,7 +18,7 @@ mod tests {
             tre_regcomp(
                 preg.as_mut_ptr(),
                 b"Hello!\0".as_ptr() as *const _,
-                (REG_EXTENDED | REG_ICASE) as i32,
+                REG_ICASE as c_int,
             )
         } != 0
         {
@@ -61,7 +62,7 @@ mod tests {
             tre_regcomp(
                 preg.as_mut_ptr(),
                 b"Hello(, [[:alpha:]]+)?!\0".as_ptr() as *const _,
-                (REG_EXTENDED | REG_ICASE) as i32,
+                (REG_EXTENDED | REG_ICASE) as c_int,
             )
         } != 0
         {
