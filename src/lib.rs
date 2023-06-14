@@ -36,8 +36,13 @@ mod tests {
             max_err: 2,
             ..Default::default()
         };
-
-        let mut amatch: regamatch_t = Default::default();
+        
+        let mut pmatch: Vec<regmatch_t> = vec![Default::default(); 1];
+        let mut amatch = regamatch_t {
+            nmatch: 1,
+            pmatch: pmatch.as_mut_ptr(),
+            ..Default::default()
+        };
 
         if unsafe { tre_regaexec(&preg, b"Hullo!\0".as_ptr() as *const _, &mut amatch, params, 0) } != 0
         {
@@ -45,6 +50,8 @@ mod tests {
         }
 
         assert_eq!(amatch.cost, 1);
+        assert_eq!(pmatch[0].rm_so, 0);
+        assert_eq!(pmatch[0].rm_eo, 6);
     }
 
     #[test]
