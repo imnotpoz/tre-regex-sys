@@ -2,7 +2,7 @@ tre-regex-sys
 -------------
 This is a crate that builds [bindgen](https://crates.io/crates/bindgen) bindings for [tre](https://laurikari.net/tre/).
 
-This does **NOT** provide a safe API wrapper!
+This does **NOT** provide a safe API wrapper! See [tre-regex](https://crates.io/crates/tre-regex) for a safe API wrapper.
 
 For documentation, see the [docs](https://docs.rs/tre-regex-sys) and the [official TRE documentation](https://laurikari.net/tre/documentation/).
 
