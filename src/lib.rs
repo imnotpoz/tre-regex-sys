@@ -126,6 +126,8 @@ mod tests {
         #[repr(C)]
         struct Data<'a>(pub &'a [u8], pub usize);
 
+        #[inline(never)]
+        #[no_mangle]
         unsafe extern "C" fn get_next_char(
             c: *mut tre_char_t,
             pos_add: *mut c_uint,
@@ -146,11 +148,15 @@ mod tests {
             0
         }
 
+        #[inline(never)]
+        #[no_mangle]
         unsafe extern "C" fn rewind(pos: usize, context: *mut c_void) {
             let mut data = context as *mut Data;
             (*data).1 = pos;
         }
 
+        #[inline(never)]
+        #[no_mangle]
         unsafe extern "C" fn compare(
             pos1: usize,
             pos2: usize,
@@ -179,7 +185,7 @@ mod tests {
                 i2_s + len
             };
 
-            if ((i1_s > i1_e) || (i2_s > i2_e)) || (i1_e - i1_s) != (i2_e - i2_s) {
+            if (i1_s > i1_e || i2_s > i2_e) || ((i1_e - i1_s) != (i2_e - i2_s)) {
                 // Different lengths, therefore unequal
                 return -1;
             }
