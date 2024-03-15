@@ -63,7 +63,7 @@ fn main() {
         println!("cargo:rustc-link-lib=static=tre");
         println!("cargo:rustc-link-lib=c");
 
-        let pathbuf = out_path.join("include").join("tre.h");
+        let pathbuf = out_path.join("include").join("tre").join("tre.h");
         include_path = pathbuf.to_str().unwrap().to_string();
     }
     #[cfg(not(feature = "vendored"))]
