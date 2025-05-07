@@ -133,7 +133,7 @@ mod tests {
             pos_add: *mut c_uint,
             context: *mut c_void,
         ) -> c_int {
-            let mut data = context as *mut Data;
+            let data = context as *mut Data;
             let string = (*data).0;
             let i = (*data).1;
 
@@ -151,7 +151,7 @@ mod tests {
         #[inline(never)]
         #[no_mangle]
         unsafe extern "C" fn rewind(pos: usize, context: *mut c_void) {
-            let mut data = context as *mut Data;
+            let data = context as *mut Data;
             (*data).1 = pos;
         }
 
