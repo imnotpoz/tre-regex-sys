@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: BSD-2-Clause
+// See LICENSE file in the project root for full license text.
+
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
