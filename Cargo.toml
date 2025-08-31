@@ -22,8 +22,3 @@ default = ["approx"]
 vendored = ["autotools", "fs_extra"]
 approx = []
 wchar = []
-
-[dependencies]
-autotools = "0.2"
-bindgen = "0.71.1"
-pkg-config = "0.3.30"
